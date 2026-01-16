@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V-NEXUS 鹿児島 | 鹿児島市の男子バレーボールクラブ・スクール</title>
+    <link rel="icon" href="https://i.imgur.com/xBGsaIi.png" type="image/png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Oswald:wght@500;700&display=swap');
+
+        :root {
+            --team-red: #e60012;
+            --team-black: #0a0a0a;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: var(--team-black);
+            color: #ffffff;
+            scroll-behavior: smooth;
+        }
+
+        .font-oswald { font-family: 'Oswald', sans-serif; }
+
+        /* Hero Styling */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.4) contrast(1.1);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(70deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
+            z-index: 1;
+        }
+
+        /* Buttons */
+        .btn-red {
+            background-color: var(--team-red);
+            color: white;
+            padding: 1rem 2.5rem;
+            font-weight: 900;
+            font-style: italic;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+        }
+
+        .btn-red:hover {
+            transform: scale(1.05);
+            background-color: #ff1a1a;
+            box-shadow: 0 0 20px rgba(230, 0, 18, 0.5);
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            font-style: italic;
+            line-height: 0.9;
+            text-transform: uppercase;
+            letter-spacing: -0.05em;
+        }
+
+        .text-outline {
+            -webkit-text-stroke: 1px rgba(255,255,255,0.3);
+            color: transparent;
+        }
+
+        /* Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* FAQ Style */
+        .faq-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        .faq-item:hover {
+            border-color: var(--team-red);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #111; }
+        ::-webkit-scrollbar-thumb { background: var(--team-red); }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-black/80 backdrop-blur-lg border-b border-white/5">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="relative w-12 h-12 flex items-center justify-center">
+                    <img src="https://i.imgur.com/xBGsaIi.png" alt="V-NEXUS Logo" class="w-full h-full object-contain transition-transform group-hover:scale-110">
+                </div>
+                <div class="leading-none">
+                    <span class="block text-2xl font-black italic tracking-tighter group-hover:text-red-600 transition-colors">V-NEXUS</span>
+                    <span class="text-[9px] font-bold text-red-600 tracking-[0.3em] uppercase">Kagoshima</span>
+                </div>
+            </a>
+            <div class="hidden lg:flex items-center space-x-8 text-[11px] font-black uppercase tracking-widest">
+                <a href="#about" class="hover:text-red-600 transition">About</a>
+                <a href="#support" class="hover:text-red-600 transition">Support</a>
+                <a href="#classes" class="hover:text-red-600 transition">Classes</a>
+                <a href="#staff" class="hover:text-red-600 transition">Staff</a>
+                <a href="#faq" class="hover:text-red-600 transition">Q&A</a>
+                <a href="#contact" class="btn-red py-2 px-6 text-xs">無料体験申込</a>
+            </div>
+            <button class="lg:hidden text-2xl"><i class="fas fa-bars"></i></button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero">
+        <div class="hero-bg">
+            <img src="https://i.imgur.com/97UhWvb.png" alt="Hero Background">
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-4xl">
+                <div class="mb-6 flex flex-wrap items-center gap-4 animate__animated animate__fadeInLeft">
+                    <span class="h-[2px] w-12 bg-red-600"></span>
+                    <span class="text-sm font-bold tracking-[0.3em] uppercase italic">Better Volleyball, Better Life</span>
+                    <span class="text-[10px] font-bold bg-white/10 text-white border border-white/20 px-2 py-1 rounded">U14クラブチーム一期生募集中</span>
+                </div>
+                <h1 class="section-title mb-8 animate__animated animate__fadeInUp">
+                    バレーで育む、<br>
+                    <span class="text-red-600">「一生モノの力」.</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-300 font-bold leading-relaxed mb-12 max-w-2xl animate__animated animate__fadeInUp animate__delay-1s">
+                    部活動の地域移行が進む今、私たちは新たな「受け皿」となります。<br>
+                    技術の向上はもちろん、挨拶・礼儀・感謝といった人間形成を軸に、社会に出たあとも大人として輝き続けられる土台を築きます。
+                </p>
+                <div class="flex flex-wrap gap-4 animate__animated animate__fadeInUp animate__delay-1s">
+                    <a href="#contact" class="btn-red text-xl">
+                        <i class="fas fa-paper-plane text-sm"></i> 無料体験に申し込む
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 animate-bounce">
+            <i class="fas fa-chevron-down text-white/30 text-2xl"></i>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="py-32 bg-black overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto">
+                <div class="reveal">
+                    <h2 class="section-title mb-10 text-center lg:text-left">CORE<br><span class="text-outline">VISION</span></h2>
+                    <h3 class="text-2xl font-black italic mb-6 border-l-4 border-red-600 pl-4">バレーボールを通じて人間力を磨く</h3>
+                    <p class="text-gray-400 font-bold leading-relaxed mb-8">
+                        V-NEXUS 鹿児島は、鹿児島市を中心に活動する男子バレーボールスクール・クラブチームです。勝利至上主義ではなく、「バレーボールを通して人生を豊かにする」ことを目的としています。
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4 bg-zinc-900/50 p-4 border border-white/5">
+                            <i class="fas fa-check text-red-600"></i>
+                            <span class="font-bold italic text-sm uppercase">挨拶・礼儀・感謝の徹底</span>
+                        </div>
+                        <div class="flex items-center gap-4 bg-zinc-900/50 p-4 border border-white/5">
+                            <i class="fas fa-check text-red-600"></i>
+                            <span class="font-bold italic text-sm uppercase">主体性を育む指導</span>
+                        </div>
+                        <div class="flex items-center gap-4 bg-zinc-900/50 p-4 border border-white/5">
+                            <i class="fas fa-check text-red-600"></i>
+                            <span class="font-bold italic text-sm uppercase">地域部活動の新たな形</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support / No Burden Section -->
+    <section id="support" class="py-32 bg-zinc-950">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20 reveal">
+                <h2 class="section-title mb-4">NO <span class="text-red-600">BURDEN</span></h2>
+                <p class="text-gray-500 font-black italic tracking-widest text-sm uppercase">保護者の負担を、最小限に。</p>
+            </div>
+            
+            <!-- 横に3つ並べるグリッドレイアウト -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                <!-- Card 1 -->
+                <div class="bg-black/40 backdrop-blur-md p-10 border border-white/5 reveal text-center group hover:border-red-600/50 transition">
+                    <div class="w-20 h-20 bg-red-600/10 rounded-full flex items-center justify-center mx-auto mb-8 group-hover:bg-red-600 transition text-red-600 group-hover:text-white">
+                        <i class="fas fa-users-slash text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-black mb-4 italic uppercase">保護者会なし</h3>
+                    <p class="text-gray-500 text-sm font-bold leading-relaxed">運営に関する業務はすべてスタッフが行います。役員等の選出も一切ありません。</p>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="bg-black/40 backdrop-blur-md p-10 border border-white/5 reveal text-center group hover:border-red-600/50 transition" style="transition-delay: 100ms;">
+                    <div class="w-20 h-20 bg-red-600/10 rounded-full flex items-center justify-center mx-auto mb-8 group-hover:bg-red-600 transition text-red-600 group-hover:text-white">
+                        <i class="fas fa-mug-hot text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-black mb-4 italic uppercase">お茶当番なし</h3>
+                    <p class="text-gray-500 text-sm font-bold leading-relaxed">練習の見守りやお茶出しの当番制はありません。共働きのご家庭でも安心して通わせられます。</p>
+                </div>
+                
+                <!-- Card 3 -->
+                <div class="bg-black/40 backdrop-blur-md p-10 border border-white/5 reveal text-center group hover:border-red-600/50 transition" style="transition-delay: 200ms;">
+                    <div class="w-20 h-20 bg-red-600/10 rounded-full flex items-center justify-center mx-auto mb-8 group-hover:bg-red-600 transition text-red-600 group-hover:text-white">
+                        <i class="fas fa-heart text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-black mb-4 italic uppercase">応援に専念</h3>
+                    <p class="text-gray-500 text-sm font-bold leading-relaxed">保護者の皆様の役割は、お子様の送迎と、試合での全力の応援のみです。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course & Classes Section -->
+    <section id="classes" class="py-32 bg-black">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title mb-6 text-center reveal">CLASSES &<br><span class="text-red-600">COURSES</span></h2>
+            <p class="text-center text-gray-500 font-bold italic mb-20 tracking-widest reveal">目的や習熟度に応じた3つのクラス体系</p>
+
+            <div class="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto mb-20">
+                <!-- Starter Class -->
+                <div class="bg-zinc-900 border border-white/5 reveal group p-8 hover:border-red-600/30 transition flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-6">
+                            <span class="text-red-600 font-black italic tracking-widest text-[10px] uppercase border border-red-600/30 px-2 py-1">初心者クラス</span>
+                            <span class="text-4xl font-black italic text-red-600 opacity-20">01</span>
+                        </div>
+                        <h4 class="text-3xl font-black italic mb-2">スタータークラス</h4>
+                        <p class="text-gray-500 text-xs font-black mb-6 italic uppercase tracking-tighter">Target: 小4 〜 小6 男子</p>
+                        <ul class="text-gray-400 text-sm font-bold space-y-3 mb-8">
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-red-600 text-xs"></i> バレーボールの楽しさを知る</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-red-600 text-xs"></i> 基礎技術の習得</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="text-gray-500 text-[10px] font-bold uppercase mb-1">月謝（4回/月）</p>
+                        <div class="flex items-baseline gap-2">
+                            <span class="text-4xl font-black italic">¥3,000</span>
+                            <span class="text-gray-600 font-bold text-xs uppercase italic">tax in</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Advance Class -->
+                <div class="bg-zinc-900 border border-white/5 reveal group p-8 hover:border-red-600/30 transition flex flex-col justify-between" style="transition-delay: 100ms;">
+                    <div>
+                        <div class="flex justify-between items-start mb-6">
+                            <span class="text-red-600 font-black italic tracking-widest text-[10px] uppercase border border-red-600/30 px-2 py-1">経験者クラス</span>
+                            <span class="text-4xl font-black italic text-red-600 opacity-20">02</span>
+                        </div>
+                        <h4 class="text-3xl font-black italic mb-2">アドバンスクラス</h4>
+                        <p class="text-gray-500 text-xs font-black mb-6 italic uppercase tracking-tighter">Target: 小5 〜 小6 男子</p>
+                        <ul class="text-gray-400 text-sm font-bold space-y-3 mb-8">
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-red-600 text-xs"></i> 実戦的な技術の向上</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-red-600 text-xs"></i> U14と一緒に練習可能</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="text-gray-500 text-[10px] font-bold uppercase mb-1">月謝（4回/月）</p>
+                        <div class="flex items-baseline gap-2">
+                            <span class="text-4xl font-black italic">¥3,500</span>
+                            <span class="text-gray-600 font-bold text-xs uppercase italic">tax in</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- U14 Club Team -->
+                <div class="bg-white text-black reveal group border-l-4 border-red-600 p-8 flex flex-col justify-between" style="transition-delay: 200ms;">
+                    <div>
+                        <div class="flex justify-between items-start mb-6">
+                            <span class="bg-red-600 text-white font-black italic tracking-widest text-[10px] uppercase px-2 py-1">PREMIUM クラブチーム</span>
+                            <span class="text-4xl font-black italic text-red-600 opacity-20">03</span>
+                        </div>
+                        <h4 class="text-3xl font-black italic mb-2">U14クラブチーム</h4>
+                        <p class="text-zinc-500 text-xs font-black mb-6 italic uppercase tracking-tighter">Target: 中1 〜 中3 男子</p>
+                        <ul class="text-zinc-700 text-sm font-bold space-y-3 mb-8">
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-red-600 text-xs"></i> 自動的にフリーパスコース適用</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-red-600 text-xs"></i> 公式戦への出場</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="text-zinc-400 text-[10px] font-bold uppercase mb-1">月謝（全練習日参加）</p>
+                        <div class="flex items-baseline gap-2">
+                            <span class="text-4xl font-black italic">¥6,600</span>
+                            <span class="text-zinc-400 font-bold text-xs uppercase italic">tax in</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Other Costs Info -->
+            <div class="grid md:grid-cols-2 gap-8 mb-16 max-w-7xl mx-auto">
+                <div class="p-8 bg-zinc-900/30 border border-white/5 reveal">
+                    <h4 class="text-xl font-black italic mb-6 flex items-center gap-3 uppercase">
+                        <i class="fas fa-coins text-red-600"></i> Other Costs
+                    </h4>
+                    <div class="space-y-6 text-sm font-bold">
+                        <div class="flex justify-between items-center border-b border-white/5 pb-4">
+                            <span class="text-gray-400">入会金</span>
+                            <span class="text-white">無料特典あり※</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-white/5 pb-4">
+                            <span class="text-gray-400">年会費</span>
+                            <span class="text-white">¥3,000 〜 ¥5,000</span>
+                        </div>
+                        <p class="text-[10px] text-gray-500 italic">※詳細についてはお問い合わせよりご確認ください。</p>
+                    </div>
+                </div>
+                
+                <div class="p-8 bg-zinc-900/30 border border-white/5 reveal" style="transition-delay: 100ms;">
+                    <h4 class="text-xl font-black italic mb-6 flex items-center gap-3 uppercase">
+                        <i class="fas fa-map-marker-alt text-red-600"></i> Practice Locations
+                    </h4>
+                    <div class="space-y-4 text-sm font-bold leading-relaxed">
+                        <div>
+                            <p class="text-gray-400 mb-1">現在の練習場所</p>
+                            <p class="text-white">東谷山小学校、東谷山中学校、桜ヶ丘西小学校</p>
+                        </div>
+                        <div>
+                            <p class="text-red-600 mb-1">2026年度より追加予定</p>
+                            <p class="text-white">甲南中学校</p>
+                        </div>
+                        <p class="text-[10px] text-gray-500 italic">※クラスにより変動あり。詳細は問い合わせより。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Voice Section -->
+    <section id="voice" class="py-32 bg-zinc-950">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title mb-20 text-center reveal"><span class="text-outline">PLAYER & PARENT</span><br>VOICE</h2>
+            <div class="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                <div class="bg-zinc-900 p-8 border-l-4 border-red-600 reveal h-full flex flex-col justify-between">
+                    <p class="text-gray-300 italic mb-6">「少年団だけでは物足りず入会しました。プロの視点での技術指導はもちろん、メンタル面のアドバイスや相談もいただけるのでとても助かっています。おかげで本人の意識が劇的に変わりました。」</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-red-600/20 rounded flex items-center justify-center">
+                            <i class="fas fa-user text-red-600"></i>
+                        </div>
+                        <div>
+                            <span class="block font-black text-sm">保護者様</span>
+                            <span class="text-[10px] text-gray-500 uppercase">Parent's Feedback</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-zinc-900 p-8 border-l-4 border-red-600 reveal h-full flex flex-col justify-between" style="transition-delay: 100ms;">
+                    <p class="text-gray-300 italic mb-6">「学校とは違う仲間と出会えて、毎回の練習が本当に楽しいです。コーチが一人ひとりの良いところを見つけて褒めてくれるので、もっと上手くなりたいと思えます！」</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-red-600/20 rounded flex items-center justify-center">
+                            <i class="fas fa-volleyball-ball text-red-600"></i>
+                        </div>
+                        <div>
+                            <span class="block font-black text-sm">生徒様</span>
+                            <span class="text-[10px] text-gray-500 uppercase">Student's Feedback</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-zinc-900 p-8 border-l-4 border-red-600 reveal h-full flex flex-col justify-between" style="transition-delay: 200ms;">
+                    <p class="text-gray-300 italic mb-6">「コーチが基礎から一つひとつ丁寧に、かつしっかり教えてくれるので、息子も毎週の練習を心待ちにしています。着実に上達しているのが分かり、入会して本当に良かったです。」</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-red-600/20 rounded flex items-center justify-center">
+                            <i class="fas fa-hands-helping text-red-600"></i>
+                        </div>
+                        <div>
+                            <span class="block font-black text-sm">保護者様</span>
+                            <span class="text-[10px] text-gray-500 uppercase">Parent's Feedback</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-32 bg-black">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title mb-20 text-center reveal">PRACTICE<br><span class="text-red-600">GALLERY</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <div class="reveal overflow-hidden aspect-[4/3] bg-zinc-900 border border-white/5">
+                    <img src="https://i.imgur.com/Mgi3PEr.jpeg" alt="練習風景 1" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                </div>
+                <div class="reveal overflow-hidden aspect-[4/3] bg-zinc-900 border border-white/5" style="transition-delay: 100ms;">
+                    <img src="https://i.imgur.com/ObaSVSu.jpeg" alt="練習風景 2" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Staff Section -->
+    <section id="staff" class="py-32 bg-zinc-950">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title mb-20 reveal">TEAM <span class="text-red-600">STAFF</span></h2>
+            
+            <div class="max-w-6xl mx-auto">
+                <div class="grid lg:grid-cols-2 gap-8 mb-8">
+                    <!-- Representative -->
+                    <div class="reveal bg-zinc-900/30 border border-white/5 p-8 flex flex-col min-h-[300px]">
+                        <div class="mb-4">
+                            <span class="text-red-600 font-black italic uppercase tracking-widest text-[11px] mb-2 block">REPRESENTATIVE</span>
+                            <h3 class="text-3xl font-black italic mb-1 uppercase">前田 渚</h3>
+                            <p class="text-gray-400 font-bold italic text-sm">代表・バレーボールコーチ１（主にスタータークラス）<br>看護師 / 公認心理師</p>
+                        </div>
+                        <div class="mt-auto pt-6 border-t border-white/5">
+                            <p class="text-gray-500 text-sm leading-relaxed">
+                                医療と心理の専門知識を活かし、子供たちの心身の健康と成長を多角的にサポートします。
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Director -->
+                    <div class="reveal bg-zinc-900/30 border border-white/5 p-8 flex flex-col min-h-[300px]" style="transition-delay: 100ms;">
+                        <div class="mb-4">
+                            <span class="text-red-600 font-black italic uppercase tracking-widest text-[11px] mb-2 block">DIRECTOR</span>
+                            <h3 class="text-3xl font-black italic mb-1 uppercase">瀬戸口 卓也</h3>
+                            <p class="text-gray-400 font-bold italic text-sm">監督 / 柔道整復師</p>
+                        </div>
+                        <div class="mt-auto pt-6 border-t border-white/5">
+                            <p class="text-gray-500 text-sm leading-relaxed">
+                                身体のケアを含めた勝てるチーム作りを徹底。怪我の予防とパフォーマンス向上を両立させた指導を行います。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coach Grid -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 reveal" style="transition-delay: 200ms;">
+                    <!-- Coach 1 -->
+                    <div class="bg-zinc-900/30 border border-white/5 p-6 flex flex-col min-h-[220px]">
+                        <div class="mb-4">
+                            <span class="text-red-600 font-black italic text-[10px] mb-2 block uppercase tracking-wider">COACH</span>
+                            <h4 class="text-xl font-black italic mb-1 uppercase">福丸 隼汰</h4>
+                            <p class="text-gray-400 font-bold text-xs italic">コーチ / 看護師</p>
+                        </div>
+                        <div class="mt-auto pt-4 border-t border-white/5">
+                            <p class="text-gray-500 text-[11px] leading-relaxed">最新トレンドの技術指導と健康管理を担当。</p>
+                        </div>
+                    </div>
+                    <!-- Coach 2 -->
+                    <div class="bg-zinc-900/30 border border-white/5 p-6 flex flex-col min-h-[220px]">
+                        <div class="mb-4">
+                            <span class="text-red-600 font-black italic text-[10px] mb-2 block uppercase tracking-wider">COACH</span>
+                            <h4 class="text-xl font-black italic mb-1 uppercase">高瀬 順也</h4>
+                            <p class="text-gray-400 font-bold text-xs italic">コーチ</p>
+                        </div>
+                        <div class="mt-auto pt-4 border-t border-white/5">
+                            <p class="text-gray-500 text-[11px] leading-relaxed">JOC選抜、春高、国体出場経験を活かした実戦的指導。</p>
+                        </div>
+                    </div>
+                    <!-- Visiting Lecturer -->
+                    <div class="bg-zinc-900/30 border border-white/5 p-6 flex flex-col min-h-[220px]">
+                        <div class="mb-4">
+                            <span class="text-red-600 font-black italic text-[10px] mb-2 block uppercase tracking-wider">LECTURER</span>
+                            <h4 class="text-xl font-black italic mb-1 uppercase">外部講師 1名</h4>
+                            <p class="text-gray-400 font-bold text-xs italic">Specialist</p>
+                        </div>
+                        <div class="mt-auto pt-4 border-t border-white/5">
+                            <p class="text-gray-500 text-[11px] leading-relaxed">専門分野による特別指導でスキルアップを促進。</p>
+                        </div>
+                    </div>
+                    <!-- Assistant Coach -->
+                    <div class="bg-zinc-900/30 border border-white/5 p-6 flex flex-col min-h-[220px]">
+                        <div class="mb-4">
+                            <span class="text-red-600 font-black italic text-[10px] mb-2 block uppercase tracking-wider">ASSISTANT COACH</span>
+                            <h4 class="text-xl font-black italic mb-1 uppercase">アシスタントコーチ</h4>
+                            <p class="text-gray-400 font-bold text-xs italic">Support Staff</p>
+                        </div>
+                        <div class="mt-auto pt-4 border-t border-white/5">
+                            <p class="text-gray-500 text-[11px] leading-relaxed">一人ひとりへのきめ細かなサポート体制を構築。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Q&A Section -->
+    <section id="faq" class="py-32 bg-black">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <h2 class="section-title mb-20 text-center reveal">Q&A</h2>
+            <div class="space-y-4 reveal">
+                <div class="faq-item p-6 rounded-lg">
+                    <h3 class="text-lg font-black italic mb-3 flex items-start gap-3">
+                        <span class="text-red-600">Q.</span> バレーボール未経験ですが大丈夫ですか？
+                    </h3>
+                    <p class="text-gray-400 text-sm pl-8 leading-relaxed">
+                        はい、全く問題ありません！「スタータークラス」ではボールの触り方から基礎を丁寧に指導します。まず「バレーボールが楽しい！」と思ってもらえることを第一に考えています。
+                    </p>
+                </div>
+                <div class="faq-item p-6 rounded-lg">
+                    <h3 class="text-lg font-black italic mb-3 flex items-start gap-3">
+                        <span class="text-red-600">Q.</span> 練習の見学や保護者の同伴は必要ですか？
+                    </h3>
+                    <p class="text-gray-400 text-sm pl-8 leading-relaxed">
+                        見学は自由ですが、強制ではありません。お茶出しや清掃などの「当番」も一切ございませんので、お子様の送迎のみで大丈夫です。
+                    </p>
+                </div>
+                <div class="faq-item p-6 rounded-lg">
+                    <h3 class="text-lg font-black italic mb-3 flex items-start gap-3">
+                        <span class="text-red-600">Q.</span> スポーツ少年団と両立できますか？
+                    </h3>
+                    <p class="text-gray-400 text-sm pl-8 leading-relaxed">
+                        はい、可能です。実際に少年団と併用して通っている生徒もいます。ただし、活動頻度や体の負担についてはコーチと相談しながら進めることをおすすめしています。
+                    </p>
+                </div>
+                <div class="faq-item p-6 rounded-lg">
+                    <h3 class="text-lg font-black italic mb-3 flex items-start gap-3">
+                        <span class="text-red-600">Q.</span> 練習場所はどこですか？
+                    </h3>
+                    <p class="text-gray-400 text-sm pl-8 leading-relaxed">
+                        主に東谷山小学校、東谷山中学校、桜ヶ丘西小学校を使用しています。クラスにより場所が変動するため、詳しくはお問い合わせ時にご案内いたします。また、2026年度より甲南中学校でも練習を開始する予定です。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA / Contact -->
+    <section id="contact" class="py-32 bg-red-600 text-center relative overflow-hidden">
+        <div class="container mx-auto px-6 relative z-10">
+            <h2 class="section-title text-white mb-12">LET'S START<br><span class="opacity-30">TOGETHER.</span></h2>
+            <p class="text-xl font-black italic mb-16 text-white uppercase tracking-widest animate-pulse">
+                無料体験レッスン随時受付中！
+            </p>
+            <div class="flex flex-col md:flex-row justify-center gap-6">
+                <a href="https://lin.ee/0z2EzWd" target="_blank" class="bg-[#06C755] text-white px-12 py-6 rounded-full font-black italic text-2xl flex items-center justify-center gap-4 hover:scale-105 transition shadow-2xl">
+                    <i class="fab fa-line text-4xl"></i> 公式LINEで予約
+                </a>
+                <a href="https://www.instagram.com/nexus.kagoshima" target="_blank" class="bg-black text-white px-12 py-6 rounded-full font-black italic text-2xl flex items-center justify-center gap-4 hover:scale-105 transition shadow-2xl">
+                    <i class="fab fa-instagram text-4xl"></i> Instagramを見る
+                </a>
+            </div>
+        </div>
+        <div class="absolute -bottom-20 -right-20 opacity-10 pointer-events-none">
+            <i class="fas fa-volleyball-ball text-[400px]"></i>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-16 border-t border-white/5">
+        <div class="container mx-auto px-6 text-center">
+            <div class="flex flex-col items-center mb-12">
+                <img src="https://i.imgur.com/xBGsaIi.png" alt="Footer Logo" class="w-16 h-16 object-contain mb-4">
+                <h4 class="text-2xl font-black italic uppercase">V-NEXUS KAGOSHIMA</h4>
+                <p class="text-[10px] text-gray-600 font-black italic uppercase tracking-[0.5em] mt-2">No Limits, Only Growth.</p>
+            </div>
+            <nav class="flex flex-wrap justify-center gap-8 mb-12 text-[10px] font-black uppercase tracking-widest text-gray-500">
+                <a href="#about" class="hover:text-white">Vision</a>
+                <a href="#support" class="hover:text-white">No Burden</a>
+                <a href="#classes" class="hover:text-white">Classes</a>
+                <a href="#staff" class="hover:text-white">Staff</a>
+                <a href="#faq" class="hover:text-white">FAQ</a>
+            </nav>
+            <p class="text-[9px] text-zinc-800 font-bold uppercase tracking-widest">&copy; 2026 V-NEXUS KAGOSHIMA. ALL RIGHTS RESERVED.</p>
+        </div>
+    </footer>
+
+    <script>
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        window.onload = reveal;
+
+        document.querySelector('button.lg\\:hidden').addEventListener('click', () => {
+            const nav = document.querySelector('nav div.hidden.lg\\:flex');
+            nav.classList.toggle('hidden');
+            nav.classList.toggle('flex');
+            nav.classList.toggle('flex-col');
+            nav.classList.toggle('absolute');
+            nav.classList.toggle('top-full');
+            nav.classList.toggle('left-0');
+            nav.classList.toggle('w-full');
+            nav.classList.toggle('bg-black');
+            nav.classList.toggle('p-6');
+            nav.classList.toggle('space-y-4');
+        });
+    </script>
+</body>
+</html>
