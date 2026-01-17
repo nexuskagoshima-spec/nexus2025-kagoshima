@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>V-NEXUS 鹿児島 | 鹿児島市の男子バレーボールクラブ・スクール</title>
-    <!-- Favicon using the team logo -->
+    <title>V-NEXUS 鹿児島 | 地域部活動の受け皿となる男子バレーボールクラブ</title>
     <link rel="icon" href="https://i.imgur.com/xBGsaIi.png" type="image/png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -15,6 +14,7 @@
         :root {
             --team-red: #e60012;
             --team-black: #0a0a0a;
+            --team-gray: #1a1a1a;
         }
 
         body {
@@ -22,11 +22,16 @@
             background-color: var(--team-black);
             color: #ffffff;
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
         .font-oswald { font-family: 'Oswald', sans-serif; }
+        .text-outline {
+            -webkit-text-stroke: 1px rgba(255,255,255,0.3);
+            color: transparent;
+        }
 
-        /* --- UI Elements --- */
+        /* Hero Animation */
         .hero {
             position: relative;
             height: 100vh;
@@ -38,61 +43,91 @@
         .hero-bg {
             position: absolute;
             inset: 0;
+            background-image: url('https://images.unsplash.com/photo-1592656094267-764a45159577?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
             z-index: 0;
+            filter: grayscale(40%) brightness(0.3);
+            transform: scale(1.1);
+            animation: pan 20s infinite alternate;
         }
 
-        .hero-bg img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(0.4) contrast(1.1);
+        @keyframes pan {
+            from { transform: scale(1.1) translateX(-2%); }
+            to { transform: scale(1.2) translateX(2%); }
         }
 
         .hero-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(70deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
+            background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0) 100%);
             z-index: 1;
         }
 
-        .btn-red {
+        /* Buttons */
+        .btn-nexus {
+            position: relative;
             background-color: var(--team-red);
             color: white;
-            padding: 1rem 2.5rem;
+            padding: 1rem 3rem;
             font-weight: 900;
             font-style: italic;
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
+            gap: 0.75rem;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+            overflow: hidden;
         }
 
-        .btn-red:hover {
-            transform: scale(1.05);
+        .btn-nexus:hover {
+            transform: scale(1.05) skewX(-2deg);
             background-color: #ff1a1a;
-            box-shadow: 0 0 20px rgba(230, 0, 18, 0.5);
+            box-shadow: 0 10px 30px rgba(230, 0, 18, 0.4);
         }
 
+        .btn-line {
+            background-color: #06C755;
+            color: white;
+            padding: 1rem 2.5rem;
+            font-weight: 900;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            border-radius: 9999px;
+            transition: all 0.3s ease;
+        }
+        .btn-line:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(6, 199, 85, 0.3);
+        }
+
+        .btn-insta {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: white;
+            padding: 1rem 2.5rem;
+            font-weight: 900;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            border-radius: 9999px;
+            transition: all 0.3s ease;
+        }
+
+        /* Sections */
         .section-title {
-            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-size: clamp(3rem, 10vw, 6.5rem);
             font-weight: 900;
             font-style: italic;
-            line-height: 0.9;
+            line-height: 0.85;
             text-transform: uppercase;
             letter-spacing: -0.05em;
         }
 
-        .text-outline {
-            -webkit-text-stroke: 1px rgba(255,255,255,0.3);
-            color: transparent;
-        }
-
-        /* --- Animations --- */
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.215, 0.61, 0.355, 1);
         }
 
         .reveal.active {
@@ -100,421 +135,625 @@
             transform: translateY(0);
         }
 
-        /* --- Components --- */
-        .faq-item {
-            background: rgba(255, 255, 255, 0.03);
+        /* Cards & Components */
+        .info-card {
+            background: linear-gradient(145deg, #151515, #0a0a0a);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
+            position: relative;
         }
-        .faq-item:hover {
+        .info-card:hover {
             border-color: var(--team-red);
+            transform: translateY(-10px);
         }
 
-        .gold-border { border: 1px solid rgba(255, 215, 0, 0.2); position: relative; overflow: hidden; }
-        .silver-border { border: 1px solid rgba(192, 192, 192, 0.2); position: relative; }
-        .support-border { border: 1px solid rgba(255, 255, 255, 0.1); position: relative; }
+        .voice-card {
+            background: #111;
+            padding: 2.5rem;
+            border-radius: 1.5rem;
+            position: relative;
+            border: 1px solid #222;
+        }
+        .voice-card::before {
+            content: '“';
+            position: absolute;
+            top: 1rem;
+            left: 1.5rem;
+            font-size: 5rem;
+            color: var(--team-red);
+            opacity: 0.3;
+            font-family: serif;
+        }
 
-        /* --- Slideshow --- */
+        /* Slide Show Styles */
         .slideshow-container {
             position: relative;
             width: 100%;
+            aspect-ratio: 16/9;
             overflow: hidden;
+            border-radius: 1rem;
         }
         .slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .slide.active { opacity: 1; }
+        .slide img { width: 100%; height: 100%; object-fit: cover; }
+        
+        /* Slide Caption */
+        .slide-caption {
+            position: absolute;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.8);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* Staff Section */
+        .staff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .staff-card {
+            background: #111;
+            border: 1px solid #222;
+            padding: 2rem;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        .staff-card:hover {
+            background: #1a1a1a;
+            border-color: var(--team-red);
+        }
+
+        /* Q&A Accordion */
+        .qa-item {
+            background: #0d0d0d;
+            border: 1px solid #222;
+            margin-bottom: 1rem;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        .qa-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 800;
+            transition: background 0.3s;
+        }
+        .qa-answer {
+            padding: 0 1.5rem 1.5rem;
+            color: #aaa;
+            font-size: 0.95rem;
+            line-height: 1.6;
             display: none;
-            width: 100%;
-            height: 100%;
-            animation: fadeEffect 1s;
         }
-        @keyframes fadeEffect {
-            from {opacity: 0.4}
-            to {opacity: 1}
-        }
-        .slide.active {
-            display: block;
-        }
+        .qa-item.active .qa-answer { display: block; }
 
         /* Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #111; }
-        ::-webkit-scrollbar-thumb { background: var(--team-red); }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: var(--team-red); border-radius: 10px; }
+        
+        /* Supporter Section Adjustments */
+        .supporter-logo {
+            filter: grayscale(100%) opacity(0.7);
+            transition: all 0.4s ease;
+        }
+        .supporter-logo:hover {
+            filter: grayscale(0%) opacity(1);
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
 
     <!-- Header Navigation -->
-    <nav class="fixed w-full z-50 bg-black/80 backdrop-blur-lg border-b border-white/5">
+    <nav class="fixed w-full z-50 bg-black/90 backdrop-blur-md border-b border-white/5">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="flex items-center gap-3 group">
-                <div class="relative w-12 h-12 flex items-center justify-center">
-                    <img src="https://i.imgur.com/xBGsaIi.png" alt="V-NEXUS Logo" class="w-full h-full object-contain transition-transform group-hover:scale-110">
-                </div>
+                <img src="https://i.imgur.com/xBGsaIi.png" alt="V-NEXUS Logo" class="h-12 w-auto group-hover:rotate-12 transition-transform duration-500">
                 <div class="leading-none">
                     <span class="block text-2xl font-black italic tracking-tighter group-hover:text-red-600 transition-colors">V-NEXUS</span>
-                    <span class="text-[9px] font-bold text-red-600 tracking-[0.3em] uppercase">Kagoshima</span>
+                    <span class="text-[10px] font-bold text-red-600 tracking-[0.4em] uppercase">Kagoshima</span>
                 </div>
             </a>
             <div class="hidden lg:flex items-center space-x-8 text-[11px] font-black uppercase tracking-widest">
-                <a href="#about" class="hover:text-red-600 transition">About</a>
-                <a href="#support" class="hover:text-red-600 transition">Support</a>
-                <a href="#classes" class="hover:text-red-600 transition">Classes</a>
-                <a href="#nexus-cup" class="hover:text-red-600 transition">NEXUS CUP</a>
-                <a href="#staff" class="hover:text-red-600 transition">Staff</a>
-                <a href="#sponsors" class="hover:text-red-600 transition">Sponsors</a>
-                <a href="#faq" class="hover:text-red-600 transition">Q&A</a>
-                <a href="#contact" class="btn-red py-2 px-6 text-xs">無料体験申込</a>
+                <a href="#vision" class="hover:text-red-600 transition">Vision</a>
+                <a href="#event" class="hover:text-red-600 transition text-red-500">NEXUS CUP</a>
+                <a href="#gallery" class="hover:text-red-600 transition text-zinc-400">Gallery</a>
+                <a href="#support" class="hover:text-red-600 transition text-red-400">Support</a>
+                <a href="#details" class="hover:text-red-600 transition">Course</a>
+                <a href="#voice" class="hover:text-red-600 transition text-zinc-400">Voice</a>
+                <a href="#qa" class="hover:text-red-600 transition text-zinc-500">Q&A</a>
+                <div class="flex items-center gap-4 border-l border-white/10 pl-8">
+                    <a href="https://www.instagram.com/nexus.kagoshima" target="_blank" class="text-zinc-400 hover:text-white transition text-xl">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://lin.ee/l07Eicim" target="_blank" class="btn-line py-2 px-6 text-[10px]"><i class="fab fa-line text-lg"></i> LINE</a>
+                </div>
             </div>
-            <button class="lg:hidden text-2xl"><i class="fas fa-bars"></i></button>
+            <button class="lg:hidden text-2xl" id="menu-toggle"><i class="fas fa-bars"></i></button>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <header class="hero">
-        <div class="hero-bg">
-            <img src="https://i.imgur.com/97UhWvb.png" alt="Hero Background">
-        </div>
+    <section class="hero">
+        <div class="hero-bg"></div>
         <div class="hero-overlay"></div>
         <div class="container mx-auto px-6 relative z-10">
-            <div class="max-w-4xl">
-                <div class="mb-6 flex flex-wrap items-center gap-4 animate__animated animate__fadeInLeft">
-                    <span class="h-[2px] w-12 bg-red-600"></span>
-                    <span class="text-sm font-bold tracking-[0.3em] uppercase italic">Better Volleyball, Better Life</span>
-                    <span class="text-[10px] font-bold bg-white/10 text-white border border-white/20 px-2 py-1 rounded">U14クラブチーム一期生募集中</span>
+            <div class="max-w-5xl">
+                <div class="flex flex-wrap items-center gap-3 mb-6 animate__animated animate__fadeInLeft">
+                    <div class="px-3 py-1 bg-white text-black text-[10px] font-black tracking-[0.2em] rounded-sm">地域部活動展開の受け皿</div>
+                    <div class="px-3 py-1 bg-red-600 text-white text-[10px] font-black tracking-[0.3em]">一期生募集中</div>
                 </div>
                 <h1 class="section-title mb-8 animate__animated animate__fadeInUp">
-                    バレーで育む、<br>
-                    <span class="text-red-600">「一生モノの力」.</span>
+                    地域スポーツの<br>
+                    <span class="text-red-600">新たな「受け皿」へ.</span>
                 </h1>
-                <p class="text-lg md:text-xl text-gray-300 font-bold leading-relaxed mb-12 max-w-2xl animate__animated animate__fadeInUp animate__delay-1s">
-                    部活動の地域移行が進む今、私たちは新たな「受け皿」となります。<br>
-                    技術の向上はもちろん、挨拶・礼儀・感謝といった人間形成を軸に、社会に出たあとも大人として輝き続けられる土台を築きます。
+                <p class="text-xl md:text-2xl text-gray-200 font-bold leading-relaxed mb-12 max-w-4xl animate__animated animate__fadeInUp animate__delay-1s">
+                    部活動の地域移行が進む今、私たちはその中心的な役割を担うべく設立された<br>
+                    <span class="text-white border-b-2 border-red-600">男子バレーボールクラブチーム＆スクール</span>です。
                 </p>
-                <div class="flex flex-wrap gap-4 animate__animated animate__fadeInUp animate__delay-1s">
-                    <a href="#contact" class="btn-red text-xl">
-                        <i class="fas fa-paper-plane text-sm"></i> 無料体験に申し込む
+                <div class="flex flex-wrap gap-6 animate__animated animate__fadeInUp animate__delay-1s">
+                    <a href="https://lin.ee/l07Eicim" target="_blank" class="btn-nexus text-xl">
+                        <span>無料体験に申し込む</span>
+                        <i class="fas fa-chevron-right"></i>
                     </a>
-                </div>
-            </div>
-        </div>
-        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 animate-bounce">
-            <i class="fas fa-chevron-down text-white/30 text-2xl"></i>
-        </div>
-    </header>
-
-    <!-- About Section -->
-    <section id="about" class="py-32 bg-black overflow-hidden">
-        <div class="container mx-auto px-6">
-            <div class="max-w-3xl mx-auto">
-                <div class="reveal">
-                    <h2 class="section-title mb-10 text-center lg:text-left">CORE<br><span class="text-outline">VISION</span></h2>
-                    <h3 class="text-2xl font-black italic mb-6 border-l-4 border-red-600 pl-4">バレーボールを通じて人間力を磨く</h3>
-                    <p class="text-gray-400 font-bold –relaxed mb-8">
-                        V-NEXUS 鹿児島は、鹿児島市を中心に活動する男子バレーボールスクール・クラブチームです。勝利至上主義ではなく、「バレーボールを通して人生を豊かにする」ことを目的としています。
-                    </p>
-                    <div class="space-y-4">
-                        <div class="flex items-center gap-4 bg-zinc-900/50 p-4 border border-white/5">
-                            <i class="fas fa-check text-red-600"></i>
-                            <span class="font-bold italic text-sm uppercase">挨拶・礼儀・感謝の徹底</span>
-                        </div>
-                        <div class="flex items-center gap-4 bg-zinc-900/50 p-4 border border-white/5">
-                            <i class="fas fa-check text-red-600"></i>
-                            <span class="font-bold italic text-sm uppercase">主体性を育む指導</span>
-                        </div>
-                        <div class="flex items-center gap-4 bg-zinc-900/50 p-4 border border-white/5">
-                            <i class="fas fa-check text-red-600"></i>
-                            <span class="font-bold italic text-sm uppercase">地域部活動の新たな形</span>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- NEXUS CUP Section -->
-    <section id="nexus-cup" class="py-32 bg-black overflow-hidden border-y border-white/5">
+    <!-- Vision Section -->
+    <section id="vision" class="py-32 bg-black overflow-hidden">
         <div class="container mx-auto px-6">
-            <div class="grid lg:grid-cols-2 gap-16 items-center max-w-7xl mx-auto">
+            <h2 class="section-title mb-16 text-center reveal">TEAM <span class="text-red-600">VISION</span></h2>
+            
+            <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
                 <div class="reveal">
-                    <div class="flex items-center gap-4 mb-6">
-                        <span class="h-[2px] w-12 bg-red-600"></span>
-                        <span class="text-sm font-black italic text-red-600 tracking-widest uppercase">Special Event</span>
-                    </div>
-                    
-                    <div class="flex flex-col gap-4 mb-10">
-                        <h2 class="section-title italic">NEXUS <span class="text-red-600">CUP</span></h2>
-                        <!-- Nexus Cup Logo -->
-                        <div class="w-32 opacity-80 hover:opacity-100 transition-opacity">
-                            <img src="https://i.imgur.com/u0B1IXg.jpeg" alt="NEXUS CUP Logo" class="w-full h-auto grayscale hover:grayscale-0 transition-all duration-500">
+                    <p class="text-3xl font-black italic mb-8 border-l-8 border-red-600 pl-6">一生懸命バレーに取り組み、<br>最大級に楽しむ集団へ。</p>
+                    <div class="space-y-6 text-zinc-300 font-bold leading-relaxed">
+                        <p>私たちは、技術のある選手を勧誘してチームを作ることはしません。「全力で楽しむ」その先にこそ、真の勝利の喜びと心身の強さが備わると信じているからです。</p>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+                            <div class="p-4 bg-zinc-900 border border-white/5 rounded-lg text-center">
+                                <span class="block text-red-600 text-xs font-black mb-1 uppercase tracking-tighter">Autonomy</span>
+                                <span class="text-white font-black italic">自主性・自律性</span>
+                            </div>
+                            <div class="p-4 bg-zinc-900 border border-white/5 rounded-lg text-center">
+                                <span class="block text-red-600 text-xs font-black mb-1 uppercase tracking-tighter">Cooperation</span>
+                                <span class="text-white font-black italic">協調性</span>
+                            </div>
+                            <div class="p-4 bg-zinc-900 border border-white/5 rounded-lg text-center">
+                                <span class="block text-red-600 text-xs font-black mb-1 uppercase tracking-tighter">Self-Efficacy</span>
+                                <span class="text-white font-black italic">自己効力感</span>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="space-y-6 text-gray-300 font-bold leading-relaxed mb-10">
-                        <p class="text-xl text-white italic">
-                            日本初!? 小学生から社会人まで、<br>
-                            「一同に開催・参加できる」4v4バレーボール大会。
-                        </p>
-                        <p>
-                            所属チームの垣根を越え、バレーボールを愛する人なら誰でも参加可能。あえて監督を置かないことで、選手たちが自ら考え、楽しみ、絆を深める「真の普及」を目指して主催しました。
-                        </p>
-                        <p class="bg-red-600/10 border-l-4 border-red-600 p-4 italic text-white">
-                            「とても楽しかった！」「ぜひまた開催してほしい！」と大好評のうちに幕を閉じました。
-                        </p>
-                        <p class="text-red-600 text-lg italic animate-pulse">
-                            次回の開催も計画中！最新情報はSNSをチェックしてください。
-                        </p>
-                    </div>
-                    <div class="flex gap-4">
-                        <a href="https://www.instagram.com/nexus.kagoshima" target="_blank" class="btn-red">
-                            <i class="fab fa-instagram"></i> 最新情報をチェック
-                        </a>
                     </div>
                 </div>
-                <div class="reveal relative group" style="transition-delay: 200ms;">
-                    <div class="absolute -inset-4 border border-red-600/20 translate-x-4 translate-y-4 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform"></div>
-                    <div class="relative overflow-hidden aspect-video bg-zinc-900 border border-white/10 shadow-2xl slideshow-container" id="nexus-slideshow">
-                        <!-- Slides: Adjusted object-position to focus on faces/action -->
-                        <div class="slide active h-full">
-                            <img src="https://i.imgur.com/86lrG2l.jpeg" alt="NEXUS CUP Event" class="w-full h-full object-cover object-top">
-                        </div>
-                        <div class="slide h-full">
-                            <img src="https://i.imgur.com/0rNZDrA.jpeg" alt="NEXUS CUP Action 1" class="w-full h-full object-cover object-[center_30%]">
-                        </div>
-                        <div class="slide h-full">
-                            <img src="https://i.imgur.com/gX5Gu1c.jpeg" alt="NEXUS CUP Action 2" class="w-full h-full object-cover object-[center_20%]">
-                        </div>
-                        <div class="slide h-full">
-                            <img src="https://i.imgur.com/whFY0fy.jpeg" alt="NEXUS CUP Action 3" class="w-full h-full object-cover object-[center_40%]">
-                        </div>
-                        <div class="slide h-full">
-                            <img src="https://i.imgur.com/2Clmbf3.jpeg" alt="NEXUS CUP Action 4" class="w-full h-full object-cover object-top">
-                        </div>
-                        <div class="slide h-full">
-                            <img src="https://i.imgur.com/rm0qfjB.jpeg" alt="NEXUS CUP Action 5" class="w-full h-full object-cover object-[center_20%]">
-                        </div>
-
-                        <!-- Navigation Arrows -->
-                        <button onclick="changeSlide(-1)" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-red-600 text-white w-10 h-10 flex items-center justify-center rounded-full transition-colors z-20">
-                            <i class="fas fa-chevron-left"></i>
-                        </button>
-                        <button onclick="changeSlide(1)" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-red-600 text-white w-10 h-10 flex items-center justify-center rounded-full transition-colors z-20">
-                            <i class="fas fa-chevron-right"></i>
-                        </button>
-
-                        <!-- Indicators -->
-                        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20" id="slide-indicators">
-                            <!-- JS generates dots here -->
-                        </div>
-                    </div>
-                    <div class="absolute bottom-4 left-4 bg-black/80 backdrop-blur-md px-4 py-2 border-l-2 border-red-600 z-30">
-                        <p class="text-[10px] font-black italic text-white uppercase tracking-tighter">Event Gallery: NEXUS CUP</p>
-                    </div>
+                <div class="reveal bg-zinc-900/50 p-8 rounded-2xl border border-white/5">
+                    <h3 class="text-xl font-black italic text-white mb-6 flex items-center gap-3">
+                        <i class="fas fa-shield-alt text-red-600"></i>
+                        社会で生きるためのマナー
+                    </h3>
+                    <ul class="grid grid-cols-2 gap-y-4 gap-x-2 text-sm font-bold text-zinc-400">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-red-600 text-[10px]"></i> ルールを守る</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-red-600 text-[10px]"></i> 友好な関係を築く</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-red-600 text-[10px]"></i> 感謝の心を持つ</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-red-600 text-[10px]"></i> 礼儀と挨拶</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-red-600 text-[10px]"></i> 整理整頓</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-red-600 text-[10px]"></i> スポーツマンシップ</li>
+                    </ul>
+                    <p class="mt-8 text-xs text-zinc-500 leading-loose">技術の向上はもちろん、人として社会で生きていくために必要な最低限のマナーを、バレーボールを通じて丁寧に指導していきます。</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Support Section -->
-    <section id="support" class="py-32 bg-zinc-950">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-20 reveal">
-                <h2 class="section-title mb-4">NO <span class="text-red-600">BURDEN</span></h2>
-                <p class="text-gray-500 font-black italic tracking-widest text-sm uppercase">保護者の負担を、最小限に。</p>
+    <section id="support" class="py-32 bg-zinc-950 border-y border-white/5 relative overflow-hidden">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-4xl mx-auto mb-20 text-center reveal">
+                <h2 class="section-title mb-6">ZERO <span class="text-red-600">BURDEN</span></h2>
+                <p class="text-2xl md:text-3xl font-black italic text-white mb-4">働く保護者のために。徹底した負担軽減運営。</p>
+                <p class="text-zinc-400 font-bold">V-NEXUSは、学校の部活動とは異なる「クラブ運営」の強みを活かし、<br class="hidden md:block">保護者の皆様の時間を何よりも大切にします。</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
-                <div class="bg-black/40 backdrop-blur-md p-10 border border-white/5 reveal text-center group hover:border-red-600/50 transition">
-                    <div class="w-20 h-20 bg-red-600/10 rounded-full flex items-center justify-center mx-auto mb-8 group-hover:bg-red-600 transition text-red-600 group-hover:text-white">
-                        <i class="fas fa-users-slash text-3xl"></i>
+
+            <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                <div class="info-card reveal p-8 rounded-2xl flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-red-600/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-mug-hot text-2xl text-red-600"></i>
                     </div>
-                    <h3 class="text-xl font-black mb-4 italic uppercase">保護者会なし</h3>
-                    <p class="text-gray-500 text-sm font-bold leading-relaxed">運営に関する業務はすべてスタッフが行います。役員等の選出も一切ありません。</p>
+                    <h3 class="text-xl font-black mb-3 italic">お茶当番なし</h3>
+                    <p class="text-sm text-zinc-400 font-bold leading-relaxed">練習や大会での付き添い、飲み物の用意などの当番制は一切ございません。</p>
                 </div>
-                <div class="bg-black/40 backdrop-blur-md p-10 border border-white/5 reveal text-center group hover:border-red-600/50 transition" style="transition-delay: 100ms;">
-                    <div class="w-20 h-20 bg-red-600/10 rounded-full flex items-center justify-center mx-auto mb-8 group-hover:bg-red-600 transition text-red-600 group-hover:text-white">
-                        <i class="fas fa-mug-hot text-3xl"></i>
+                <div class="info-card reveal p-8 rounded-2xl flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-red-600/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-users-slash text-2xl text-red-600"></i>
                     </div>
-                    <h3 class="text-xl font-black mb-4 italic uppercase">お茶当番なし</h3>
-                    <p class="text-gray-500 text-sm font-bold leading-relaxed">練習の見守りやお茶出しの当番制はありません。共働きのご家庭でも通わせられます。</p>
+                    <h3 class="text-xl font-black mb-3 italic">役員・保護者会なし</h3>
+                    <p class="text-sm text-zinc-400 font-bold leading-relaxed">運営に関する役員制度や、定期的な保護者集会もありません。共働きでも安心です。</p>
                 </div>
-                <div class="bg-black/40 backdrop-blur-md p-10 border border-white/5 reveal text-center group hover:border-red-600/50 transition" style="transition-delay: 200ms;">
-                    <div class="w-20 h-20 bg-red-600/10 rounded-full flex items-center justify-center mx-auto mb-8 group-hover:bg-red-600 transition text-red-600 group-hover:text-white">
-                        <i class="fas fa-heart text-3xl"></i>
+                <div class="info-card reveal p-8 rounded-2xl flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-red-600/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-car-alt text-2xl text-red-600"></i>
                     </div>
-                    <h3 class="text-xl font-black mb-4 italic uppercase">応援に専念</h3>
-                    <p class="text-gray-500 text-sm font-bold leading-relaxed">保護者の皆様の役割は、お子様の送迎と、全力の応援のみです。</p>
+                    <h3 class="text-xl font-black mb-3 italic">送迎のみでOK</h3>
+                    <p class="text-sm text-zinc-400 font-bold leading-relaxed">保護者の役割は「送迎と温かい応援」だけ。専門スタッフが責任を持って運営します。</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Classes Section -->
-    <section id="classes" class="py-32 bg-black">
+    <!-- Event Section (NEXUS CUP) -->
+    <section id="event" class="py-32 bg-black overflow-hidden relative">
+        <div class="absolute top-10 right-10 opacity-10 pointer-events-none hidden lg:block">
+            <img src="https://i.imgur.com/u0B1IXg.jpeg" alt="NEXUS CUP ICON" class="w-64 h-64 object-contain grayscale invert">
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="flex flex-col items-center mb-12 reveal">
+                <img src="https://i.imgur.com/u0B1IXg.jpeg" alt="NEXUS CUP LOGO" class="w-24 h-24 mb-6 object-contain rounded-full border-2 border-red-600 shadow-[0_0_20px_rgba(230,0,18,0.3)]">
+                <h2 class="section-title text-center">NEXUS <span class="text-red-600">CUP</span></h2>
+            </div>
+            
+            <div class="max-w-6xl mx-auto mb-16 reveal">
+                <div class="slideshow-container shadow-2xl border border-white/10" id="event-slideshow">
+                    <div class="slide active"><img src="https://i.imgur.com/u0B1IXg.jpeg" alt="NEXUS CUP Highlight"><span class="slide-caption">NEXUS CUP 記念フォト</span></div>
+                    <div class="slide"><img src="https://i.imgur.com/0rNZDrA.jpeg" alt="NEXUS CUP 1"><span class="slide-caption">大会の様子</span></div>
+                    <div class="slide"><img src="https://i.imgur.com/gX5Gu1c.jpeg" alt="NEXUS CUP 2"><span class="slide-caption">熱戦の記録</span></div>
+                    <div class="slide"><img src="https://i.imgur.com/whFY0fy.jpeg" alt="NEXUS CUP 3"><span class="slide-caption">プレーの瞬間</span></div>
+                    <div class="slide"><img src="https://i.imgur.com/2Clmbf3.jpeg" alt="NEXUS CUP 4"><span class="slide-caption">チームの絆</span></div>
+                    <div class="slide"><img src="https://i.imgur.com/vGWvtgt.jpeg" alt="NEXUS CUP 5"><span class="slide-caption">大会の様子</span></div>
+                    <div class="slide"><img src="https://i.imgur.com/rm0qfjB.jpeg" alt="NEXUS CUP 6"><span class="slide-caption">表彰式の様子</span></div>
+                    <div class="slide"><img src="https://i.imgur.com/86lrG2l.jpeg" alt="NEXUS CUP 7"><span class="slide-caption">全員で記念撮影</span></div>
+                </div>
+                <div class="mt-6 flex justify-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-red-600"></span>
+                    <span class="w-2 h-2 rounded-full bg-zinc-800"></span>
+                    <span class="w-2 h-2 rounded-full bg-zinc-800"></span>
+                    <span class="w-2 h-2 rounded-full bg-zinc-800"></span>
+                    <span class="w-2 h-2 rounded-full bg-zinc-800"></span>
+                    <span class="w-2 h-2 rounded-full bg-zinc-800"></span>
+                    <span class="w-2 h-2 rounded-full bg-zinc-800"></span>
+                    <span class="w-2 h-2 rounded-full bg-zinc-800"></span>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center gap-12 max-w-6xl mx-auto">
+                <div class="w-full md:w-full reveal">
+                    <p class="text-2xl font-black italic text-white mb-6">日本初!? 小学生から社会人までが一同に介する 4vs4 大会</p>
+                    <div class="space-y-4 text-zinc-300 font-bold leading-relaxed mb-8">
+                        <p>
+                            所属チームの垣根を越え、バレーボールを愛する人なら誰でも参加できる「監督のいない」自由な大会を開催しました。
+                            純粋にプレーを楽しみ、技術を競い合う姿に、参加者からは「とても楽しかった」「また開催してほしい」と大好評をいただいています。
+                        </p>
+                        <p class="text-white border-l-4 border-red-600 pl-4">
+                            バレーボールの普及と、愛好家のコミュニティを広げるために。<br>
+                            次回開催も計画中です。最新情報はSNSをチェックしてください！
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Training Gallery Section -->
+    <section id="gallery" class="py-32 bg-zinc-950">
         <div class="container mx-auto px-6">
-            <h2 class="section-title mb-6 text-center reveal">CLASSES &<br><span class="text-red-600">COURSES</span></h2>
-            <div class="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto mb-20">
-                <div class="bg-zinc-900 border border-white/5 reveal p-8 flex flex-col justify-between">
-                    <h4 class="text-3xl font-black italic mb-2">スタータークラス</h4>
-                    <p class="text-gray-500 text-xs font-black mb-6 italic uppercase tracking-tighter">小4 〜 小6 男子</p>
-                    <div class="flex items-baseline gap-2">
-                        <span class="text-4xl font-black italic">¥3,000</span>
-                        <span class="text-gray-600 font-bold text-xs uppercase">tax in</span>
+            <h2 class="section-title mb-16 text-center reveal">TRAINING <span class="text-red-600">GALLERY</span></h2>
+            <div class="max-w-5_5xl mx-auto reveal">
+                <div class="slideshow-container shadow-2xl border border-white/10" id="training-slideshow">
+                    <div class="slide active"><img src="https://i.imgur.com/DQpbSJO.jpeg" alt="練習風景1"></div>
+                    <div class="slide"><img src="https://i.imgur.com/BVRXoWD.jpeg" alt="練習風景2"></div>
+                    <div class="slide"><img src="https://i.imgur.com/qVwLcrZ.jpeg" alt="練習風景3"></div>
+                    <div class="slide"><img src="https://i.imgur.com/8YLZtGf.jpeg" alt="練習風景4"></div>
+                    <div class="slide"><img src="https://i.imgur.com/vXVGG8O.jpeg" alt="練習風景5"></div>
+                </div>
+                <div class="mt-6 flex justify-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-red-600"></span>
+                    <span class="w-2 h-2 rounded-full bg-zinc-800"></span>
+                    <span class="w-2 h-2 rounded-full bg-zinc-800"></span>
+                    <span class="w-2 h-2 rounded-full bg-zinc-800"></span>
+                    <span class="w-2 h-2 rounded-full bg-zinc-800"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Voice Section -->
+    <section id="voice" class="py-32 bg-black">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title mb-20 text-center reveal">PLAYER <span class="text-red-600">& VOICE</span></h2>
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="voice-card reveal">
+                    <p class="text-zinc-300 font-bold leading-relaxed mb-8 relative z-10">「中学校に男子バレー部がなくて諦めようと思いましたが、ここに出会えて良かったです。レベルの高い指導が受けられ、友達もたくさんできました！」</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-zinc-800 rounded-full flex items-center justify-center"><i class="fas fa-user text-zinc-500"></i></div>
+                        <div><p class="font-black italic">選手</p></div>
                     </div>
                 </div>
-                <div class="bg-zinc-900 border border-white/5 reveal p-8 flex flex-col justify-between" style="transition-delay: 100ms;">
-                    <h4 class="text-3xl font-black italic mb-2">アドバンスクラス</h4>
-                    <p class="text-gray-500 text-xs font-black mb-6 italic uppercase tracking-tighter">小5 〜 小6 男子</p>
-                    <div class="flex items-baseline gap-2">
-                        <span class="text-4xl font-black italic">¥3,500</span>
-                        <span class="text-gray-600 font-bold text-xs uppercase">tax in</span>
+                <div class="voice-card reveal">
+                    <p class="text-zinc-300 font-bold leading-relaxed mb-8 relative z-10">「息子が毎週練習を心待ちにしています。技術だけでなく、挨拶や準備など心の成長を感じる場面が増えました。安心してお任せできています。」</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-zinc-800 rounded-full flex items-center justify-center"><i class="fas fa-user-friends text-zinc-500"></i></div>
+                        <div><p class="font-black italic">保護者</p></div>
                     </div>
                 </div>
-                <div class="bg-white text-black reveal p-8 flex flex-col justify-between" style="transition-delay: 200ms;">
-                    <h4 class="text-3xl font-black italic mb-2">U14クラブチーム</h4>
-                    <p class="text-zinc-500 text-xs font-black mb-6 italic uppercase tracking-tighter">中1 〜 中3 男子</p>
-                    <div class="flex items-baseline gap-2">
-                        <span class="text-4xl font-black italic">¥6,600</span>
-                        <span class="text-zinc-400 font-bold text-xs uppercase">tax in</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course & Details Section -->
+    <section id="details" class="py-32 bg-zinc-950">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title mb-20 text-center reveal">COURSE <span class="text-red-600">& PLAN</span></h2>
+            
+            <div class="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto items-stretch mb-20">
+                <!-- Club Team Card -->
+                <div class="info-card reveal p-10 rounded-3xl border-2 border-red-600 bg-red-600/5">
+                    <div class="absolute -top-5 left-10 px-6 py-2 bg-red-600 text-white font-black italic text-sm skew-x-[-10deg]">選手登録あり・公式戦出場</div>
+                    <div class="mt-4 mb-6">
+                        <h3 class="text-4xl font-black italic mb-2">U14 クラブチーム</h3>
+                        <p class="text-zinc-400 font-bold italic">対象：中学1年〜中学3年 男子</p>
+                        <p class="text-red-500 font-black text-sm mt-2 italic">現在一期生募集中</p>
                     </div>
+                    <div class="space-y-6 text-sm font-bold text-zinc-300 mb-8">
+                        <p class="leading-loose">JVA選手登録を行い、クラブとしての活動を中心に練習を重ねます。技術の追求はもちろん、チームとしての絆を深め、勝利を目指す本格的なコースです。</p>
+                        <ul class="space-y-3">
+                            <li class="flex items-center gap-3"><i class="fas fa-check-circle text-red-600"></i> 公式大会への出場・遠征</li>
+                            <li class="flex items-center gap-3"><i class="fas fa-check-circle text-red-600"></i> 全練習日程に参加可能</li>
+                        </ul>
+                    </div>
+                    <div class="border-t border-white/10 pt-6 mt-auto">
+                        <div class="text-5xl font-black italic">¥6,600<span class="text-xs ml-2 text-zinc-500"> / 月額</span></div>
+                    </div>
+                </div>
+
+                <!-- Free Pass Card -->
+                <div class="info-card reveal p-10 rounded-3xl border border-white/10 bg-zinc-900/50 shadow-2xl">
+                    <div class="absolute -top-5 left-10 px-6 py-2 bg-white text-black font-black italic text-sm skew-x-[-10deg]">練習重視・通い放題</div>
+                    <div class="mt-4 mb-6">
+                        <h3 class="text-4xl font-black italic mb-2">フリーパスコース</h3>
+                        <p class="text-zinc-400 font-bold italic">対象：小学5年〜中学3年 男子</p>
+                        <p class="text-red-500 font-black text-sm mt-2 italic">現在一期生募集中</p>
+                    </div>
+                    <div class="space-y-6 text-sm font-bold text-zinc-300 mb-8">
+                        <p class="leading-loose">平日・日曜を問わず、全ての練習に制限なく参加できるスクール形式のプランです。小学5・6年生も中学生のレベルに挑戦できます。</p>
+                        <div class="bg-black/50 p-6 rounded-2xl border border-white/5 space-y-4">
+                            <p class="text-red-600 font-black text-xs tracking-widest uppercase italic">Practice Schedule</p>
+                            <div class="grid gap-3">
+                                <div class="flex justify-between items-center border-b border-white/5 pb-2">
+                                    <span class="text-xs">毎週日曜</span>
+                                    <span class="text-white">東谷山小体育館</span>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-white/5 pb-2">
+                                    <span class="text-xs">第2.4月曜</span>
+                                    <span class="text-white">桜ヶ丘西小学校</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs">第1.3.5木曜</span>
+                                    <span class="text-white">東谷山中学校</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border-t border-white/10 pt-6 mt-auto">
+                        <div class="text-5xl font-black italic">¥6,600<span class="text-xs ml-2 text-zinc-500"> / 月額</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- アカデミースタータークラス -->
+                <div class="info-card reveal p-8 rounded-2xl border border-red-600/30 bg-red-600/5 flex flex-col justify-between">
+                    <div>
+                        <h4 class="font-black italic text-xl">アカデミースタータークラス</h4>
+                        <p class="text-xs text-zinc-400 font-bold mt-1">未経験小学4年生〜小学6年生</p>
+                        <div class="mt-4 space-y-1 text-[11px] text-zinc-500 font-bold uppercase italic tracking-wider">
+                            <p><i class="fas fa-clock text-red-600 mr-2"></i>19:15 〜 20:15</p>
+                            <p><i class="fas fa-map-marker-alt text-red-600 mr-2"></i>鹿児島市東谷山小</p>
+                        </div>
+                    </div>
+                    <div class="text-3xl font-black italic mt-6 border-t border-white/5 pt-4">¥3,000</div>
+                </div>
+
+                <!-- アカデミーアドバンスクラス -->
+                <div class="info-card reveal p-8 rounded-2xl border border-red-600/30 bg-red-600/5 flex flex-col justify-between">
+                    <div>
+                        <h4 class="font-black italic text-xl">アカデミーアドバンスクラス</h4>
+                        <p class="text-xs text-zinc-400 font-bold mt-1">経験者小学5年生〜小学6年生</p>
+                        <div class="mt-4 space-y-1 text-[11px] text-zinc-500 font-bold uppercase italic tracking-wider">
+                            <p><i class="fas fa-clock text-red-600 mr-2"></i>19:00 〜 21:00</p>
+                            <p><i class="fas fa-map-marker-alt text-red-600 mr-2"></i>鹿児島市東谷山小</p>
+                        </div>
+                    </div>
+                    <div class="text-3xl font-black italic mt-6 border-t border-white/5 pt-4">¥3,500</div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Staff Section -->
-    <section id="staff" class="py-32 bg-zinc-950">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="section-title mb-20 reveal">TEAM <span class="text-red-600">STAFF</span></h2>
-            <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 mb-8 text-left">
-                <div class="reveal bg-zinc-900/30 border border-white/5 p-8 flex flex-col">
-                    <span class="text-red-600 font-black italic tracking-widest text-[11px] mb-2 block uppercase">Representative</span>
-                    <h3 class="text-3xl font-black italic mb-1 uppercase">前田 渚</h3>
-                    <p class="text-gray-400 font-bold italic text-sm mb-6">代表・バレーボールコーチ１ / 看護師 / 公認心理師</p>
-                    <p class="text-gray-500 text-sm leading-relaxed mt-auto pt-6 border-t border-white/5">医療と心理の専門知識を活かし、子供たちの成長を多角的にサポートします。</p>
+    <section id="staff" class="py-32 bg-black">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title mb-20 text-center reveal">STAFF</h2>
+            <div class="staff-grid max-w-6xl mx-auto">
+                <div class="staff-card reveal border-red-600/30">
+                    <span class="text-red-600 font-black italic text-[10px] tracking-widest uppercase">Representative / Coach</span>
+                    <h3 class="text-2xl font-black italic">前田 渚</h3>
+                    <div class="mt-3 space-y-1">
+                        <p class="text-xs text-zinc-400 font-bold">JSPOバレーボールコーチ1</p>
+                        <p class="text-[10px] text-zinc-500">公認心理師 / 看護師</p>
+                    </div>
                 </div>
-                <div class="reveal bg-zinc-900/30 border border-white/5 p-8 flex flex-col" style="transition-delay: 100ms;">
-                    <span class="text-red-600 font-black italic tracking-widest text-[11px] mb-2 block uppercase">Director</span>
-                    <h3 class="text-3xl font-black italic mb-1 uppercase">瀬戸口 卓也</h3>
-                    <p class="text-gray-400 font-bold italic text-sm mb-6">監督 / 柔道整復師</p>
-                    <p class="text-gray-500 text-sm leading-relaxed mt-auto pt-6 border-t border-white/5">身体のケアを含めた指導を徹底。怪我の予防とパフォーマンス向上を両立させます。</p>
+
+                <div class="staff-card reveal">
+                    <span class="text-red-600 font-black italic text-[10px] tracking-widest uppercase">Head Coach / Trainer</span>
+                    <h3 class="text-2xl font-black italic">瀨戸口 卓也</h3>
+                    <div class="mt-3 space-y-2">
+                        <p class="text-xs text-zinc-400 font-bold">柔道整復師</p>
+                        <ul class="text-[9px] text-zinc-500 space-y-1 border-t border-white/5 pt-2">
+                            <li>・県総体 3位</li>
+                            <li>・春高バレー鹿児島県予選 2位</li>
+                            <li>・全九州総合選手権大会 ベスト8</li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div class="max-w-6xl mx-auto text-left reveal" style="transition-delay: 200ms;">
-                <div class="bg-zinc-900/30 border border-white/5 p-8 inline-block min-w-[300px]">
-                    <span class="text-red-600 font-black italic text-[10px] block uppercase">Coach</span>
-                    <h4 class="text-2xl font-black italic uppercase">福丸 隼太</h4>
-                    <p class="text-gray-400 font-bold text-xs italic">コーチ / 看護師</p>
+
+                <div class="staff-card reveal border-red-600/20 bg-red-600/5">
+                    <span class="text-red-600 font-black italic text-[10px] tracking-widest uppercase">Technical Coach</span>
+                    <h3 class="text-2xl font-black italic">福丸 隼太</h3>
+                    <div class="mt-3 space-y-1">
+                        <p class="text-xs text-zinc-400 font-bold">看護師 / 専任教員</p>
+                    </div>
+                </div>
+
+                <div class="staff-card reveal border-red-600/20 bg-red-600/5">
+                    <span class="text-red-600 font-black italic text-[10px] tracking-widest uppercase">Technical Coach</span>
+                    <h3 class="text-2xl font-black italic">高瀬 順也</h3>
+                    <div class="mt-3 space-y-2">
+                        <p class="text-[9px] text-zinc-500 leading-relaxed">大分県出身。小中学校県1位、九州大会出場、JOC選抜入り。高校九州 3位、インターハイ・国体出場。</p>
+                    </div>
+                </div>
+
+                <div class="staff-card reveal">
+                    <span class="text-red-600 font-black italic text-[10px] tracking-widest uppercase">Assistant Coach</span>
+                    <h3 class="text-2xl font-black italic">アシスタントコーチ</h3>
+                    <p class="text-[10px] text-zinc-500 mt-2">チーム運営サポート</p>
+                </div>
+
+                <div class="staff-card reveal border-red-600/20 bg-red-600/5">
+                    <span class="text-red-600 font-black italic text-[10px] tracking-widest uppercase">External Instructor</span>
+                    <h3 class="text-2xl font-black italic">外部講師トレーナー</h3>
+                    <p class="text-[10px] text-zinc-500 mt-2">専門技術指導・フィジカルサポート</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Sponsor Section -->
-    <section id="sponsors" class="py-32 bg-black">
+    <!-- Q&A Section -->
+    <section id="qa" class="py-32 bg-zinc-950">
         <div class="container mx-auto px-6">
-            <h2 class="section-title mb-20 text-center reveal">OFFICIAL<br><span class="text-red-600">SPONSORS</span></h2>
-            
-            <div class="max-w-4xl mx-auto flex flex-col gap-12">
-                <a href="https://successcare.info/" target="_blank" class="reveal gold-border bg-zinc-900/50 p-12 transition hover:scale-105 flex flex-col items-center gap-6">
-                    <p class="text-[#FFD700] font-black italic tracking-[0.3em] text-xs uppercase">Gold Sponsor</p>
-                    <img src="https://i.imgur.com/boRupal.jpeg" alt="サクセスケア" class="max-w-[280px] w-full h-auto object-contain">
-                    <h3 class="text-2xl font-black italic">サクセスケア 様</h3>
-                </a>
+            <h2 class="section-title mb-20 text-center reveal">Q <span class="text-red-600">&</span> A</h2>
+            <div class="max-w-4xl mx-auto reveal">
+                <div class="qa-item">
+                    <div class="qa-question"><span>中学の部活動に入っていても参加できますか？</span><i class="fas fa-plus text-red-600"></i></div>
+                    <div class="qa-answer">はい、可能です。当スクールの練習日と重ならない範囲での参加や、技術向上のためのセカンドチームとして活用いただけます。</div>
+                </div>
+                <div class="qa-item">
+                    <div class="qa-question"><span>少年団との掛け持ちは可能ですか？</span><i class="fas fa-plus text-red-600"></i></div>
+                    <div class="qa-answer">はい、可能です。多くの小学生選手が少年団の活動と並行して、さらなる技術向上のために当スクールを利用されています。スケジュール等の調整が必要な場合はお気軽にご相談ください。</div>
+                </div>
+                <div class="qa-item">
+                    <div class="qa-question"><span>未経験ですが大丈夫でしょうか？</span><i class="fas fa-plus text-red-600"></i></div>
+                    <div class="qa-answer">もちろんです。スタータークラスや初心者向けの基礎指導も充実していますのでご安心ください。</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                <div class="grid md:grid-cols-2 gap-8">
-                    <a href="https://www.rebirth24.com/" target="_blank" class="reveal silver-border bg-zinc-900/30 p-8 transition hover:scale-105 flex flex-col items-center gap-4">
-                        <p class="text-[#C0C0C0] font-black italic tracking-[0.3em] text-[10px] uppercase">Silver Sponsor</p>
-                        <img src="https://i.imgur.com/2HKjp3f.jpeg" alt="（株）リバースホーム" class="max-w-[160px] w-full h-auto object-contain">
-                        <h3 class="text-lg font-black italic">（株）リバースホーム 様</h3>
+    <!-- Supporter Section -->
+    <section class="py-24 bg-black border-t border-white/5">
+        <div class="container mx-auto px-6 text-center">
+            <div class="max-w-4xl mx-auto">
+                <div class="mb-20 reveal">
+                    <p class="text-[10px] font-black tracking-[0.5em] text-yellow-500 mb-8 uppercase">Gold Sponsor</p>
+                    <a href="https://successcare.info/" target="_blank" class="inline-block supporter-logo">
+                        <img src="https://i.imgur.com/boRupal.jpeg" alt="サクセスケア" class="h-28 md:h-40 w-auto object-contain mx-auto rounded-lg shadow-[0_0_20px_rgba(234,179,8,0.2)]">
+                        <p class="mt-4 text-base font-black text-yellow-500 italic">サクセスケア</p>
                     </a>
-                    <a href="https://jalsa.or.jp/" target="_blank" class="reveal support-border bg-zinc-900/20 p-8 transition hover:scale-105 flex flex-col items-center gap-4">
-                        <p class="text-white/50 font-black italic tracking-[0.3em] text-[10px] uppercase">Special Supporter</p>
-                        <img src="https://i.imgur.com/p2AJxa7.jpeg" alt="日本アスリートライフサポート協会" class="max-w-[200px] w-full h-auto object-contain">
-                        <h3 class="text-lg font-black italic">日本アスリートライフサポート協会 様</h3>
-                    </a>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-16">
+                    <div class="reveal">
+                        <p class="text-[10px] font-black tracking-[0.5em] text-zinc-500 mb-8 uppercase">Silver Sponsor</p>
+                        <a href="https://www.rebirth24.com/" target="_blank" class="inline-block supporter-logo">
+                            <img src="https://i.imgur.com/2HKjp3f.jpeg" alt="（株）リバースホーム" class="h-24 md:h-32 w-auto object-contain mx-auto rounded-lg">
+                            <p class="mt-4 text-sm font-bold text-zinc-400 italic">（株）リバースホーム</p>
+                        </a>
+                    </div>
+                    <div class="reveal">
+                        <p class="text-[10px] font-black tracking-[0.5em] text-zinc-500 mb-8 uppercase">Special Supporter</p>
+                        <a href="http://jalsa.or.jp/" target="_blank" class="inline-block supporter-logo">
+                            <img src="https://i.imgur.com/p2AJxa7.jpeg" alt="日本アスリートライフサポート協会" class="h-24 md:h-32 w-auto object-contain mx-auto rounded-lg">
+                            <p class="mt-4 text-sm font-bold text-zinc-400 italic">日本アスリートライフサポート協会</p>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-black py-16 border-t border-white/5 text-center">
-        <div class="container mx-auto px-6">
-            <img src="https://i.imgur.com/xBGsaIi.png" alt="Footer Logo" class="w-12 h-12 mx-auto mb-4">
-            <h4 class="text-xl font-black italic uppercase">V-NEXUS KAGOSHIMA</h4>
-            <p class="text-[9px] text-zinc-700 font-bold tracking-widest mt-8">&copy; 2026 V-NEXUS KAGOSHIMA. ALL RIGHTS RESERVED.</p>
+    <footer class="bg-black py-20 border-t border-white/5">
+        <div class="container mx-auto px-6 text-center">
+            <div class="flex flex-wrap justify-center gap-6 mb-12">
+                <a href="https://lin.ee/l07Eicim" target="_blank" class="btn-line"><i class="fab fa-line text-2xl"></i> LINEで相談</a>
+                <a href="https://www.instagram.com/nexus.kagoshima" target="_blank" class="btn-insta"><i class="fab fa-instagram text-2xl"></i> Instagram</a>
+            </div>
+            <p class="text-[10px] text-zinc-700 font-black tracking-widest uppercase">&copy; 2026 V-NEXUS KAGOSHIMA.</p>
         </div>
     </footer>
 
     <script>
-        // Reveal animation on scroll
         function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 100;
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add("active");
-                }
-            }
+            document.querySelectorAll(".reveal").forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add("active");
+            });
         }
         window.addEventListener("scroll", reveal);
-
-        // Mobile Menu
-        document.querySelector('button.lg\\:hidden').addEventListener('click', () => {
-            const nav = document.querySelector('nav div.hidden.lg\\:flex');
-            nav.classList.toggle('hidden');
-            nav.classList.toggle('flex');
-            nav.classList.toggle('flex-col');
-            nav.classList.toggle('absolute');
-            nav.classList.toggle('top-full');
-            nav.classList.toggle('left-0');
-            nav.classList.toggle('w-full');
-            nav.classList.toggle('bg-black');
-            nav.classList.toggle('p-6');
-            nav.classList.toggle('space-y-4');
+        document.querySelectorAll('.qa-question').forEach(q => {
+            q.addEventListener('click', () => q.parentElement.classList.toggle('active'));
         });
 
-        // Slideshow Logic
-        let slideIndex = 0;
-        const slides = document.querySelectorAll('#nexus-slideshow .slide');
-        const indicatorContainer = document.getElementById('slide-indicators');
-
-        // Dynamically create dots based on slides
-        slides.forEach((_, index) => {
-            const dot = document.createElement('span');
-            dot.className = `slide-dot w-2 h-2 rounded-full cursor-pointer transition-colors ${index === 0 ? 'bg-white' : 'bg-white/30 hover:bg-white'}`;
-            dot.onclick = () => { slideIndex = index; showSlides(slideIndex); };
-            indicatorContainer.appendChild(dot);
-        });
-
-        const dots = document.querySelectorAll('.slide-dot');
-
-        function showSlides(n) {
-            if (n >= slides.length) slideIndex = 0;
-            if (n < 0) slideIndex = slides.length - 1;
-
-            slides.forEach(slide => slide.classList.remove('active'));
-            dots.forEach(dot => {
-                dot.classList.remove('bg-white');
-                dot.classList.add('bg-white/30');
-            });
-
-            slides[slideIndex].classList.add('active');
-            dots[slideIndex].classList.add('bg-white');
-            dots[slideIndex].classList.remove('bg-white/30');
+        function setupSlideshow(containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            const slides = container.querySelectorAll('.slide');
+            const dots = container.nextElementSibling.querySelectorAll('span');
+            let idx = 0;
+            setInterval(() => {
+                slides[idx].classList.remove('active');
+                dots[idx].className = "w-2 h-2 rounded-full bg-zinc-800";
+                idx = (idx + 1) % slides.length;
+                slides[idx].classList.add('active');
+                dots[idx].className = "w-2 h-2 rounded-full bg-red-600";
+            }, 4000);
         }
-
-        function changeSlide(n) {
-            showSlides(slideIndex += n);
-        }
-
-        // Auto transition
-        setInterval(() => { changeSlide(1); }, 5000);
 
         window.onload = () => {
             reveal();
-            showSlides(slideIndex);
+            setupSlideshow('training-slideshow');
+            setupSlideshow('event-slideshow');
         };
+
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.querySelector('.lg\\:flex');
+        menuToggle?.addEventListener('click', () => {
+            navLinks.classList.toggle('hidden');
+            navLinks.classList.toggle('flex');
+            navLinks.classList.toggle('flex-col');
+            navLinks.classList.toggle('absolute');
+            navLinks.classList.toggle('top-full');
+            navLinks.classList.toggle('left-0');
+            navLinks.classList.toggle('w-full');
+            navLinks.classList.toggle('bg-black');
+            navLinks.classList.toggle('p-6');
+        });
     </script>
 </body>
 </html>
